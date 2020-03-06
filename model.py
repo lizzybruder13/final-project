@@ -48,7 +48,7 @@ class Event(db.Model):
     event_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     location_id = db.Column(db.Integer, db.ForeignKey('locations.location_id'))
     type_id = db.Column(db.Integer, db.ForeignKey('event_types.type_id'))
-    time = db.Column(db.DateTime)
+    time = db.Column(db.Time)
     weekday = db.Column(db.String)
 
     location = db.relationship('Location', backref='event')

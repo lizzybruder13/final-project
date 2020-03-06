@@ -67,10 +67,10 @@ if __name__ == "__main__":
 
     db.create_all()
 
-    load_events()
+    
     load_event_types()
     load_locations()
-    
+    load_events()
 
 
 
