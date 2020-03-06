@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% block head %} 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% endblock %}
+
+
+{% block title %}
+  Home
+{% endblock %}
+
+
+{%block body %}
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: darkturquoise;">
+    <img src="/static/logo.png" width="100" width="60" id="logo">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Search by:
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Type</a>
+        <a class="dropdown-item" href="#">Day of the Week</a>
+      </div>
+    </div>
+    <!-- <div class="collapse navbar-collapse" id="navbarSupportContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <button class="btn btn-outline-info" href="#" style="color: grey;">Search by Type</a>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-outline-info" href="#" style="color: grey;">Search by Day of the Week</a>
+        </li>
+      </ul>
+    </div> -->
+  </nav>
+  <br>
+
+{% endblock %}
