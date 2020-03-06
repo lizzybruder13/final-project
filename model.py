@@ -5,27 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class Event(db.Model):
-    """Event from database."""
-
-    __tablename__ = "events"
-
-
-    event_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    location_id = db.Column(db.Integer, db.ForeignKey('Location.location_id'))
-    type_id = db.Column(db.Integer, db.ForeignKey('Type.type_id'))
-    time = db.Column(db.DateTime)
-    weekday = db.Column(db.String)
-
-    location = db.relationship('Location', backref='event')
-    event_type = db.relationship('Event_Type', backref='event')
-
-    def __repr__(self):
-        """Provide helpful representation when printed."""
-
-        return f"""<Event event_id={self.event_id} location_id={self.location_id}
-                    type_id={self.type_id}>"""
-
 
 class Location(db.Model):
     """Location from database."""
@@ -37,7 +16,7 @@ class Location(db.Model):
     name = db.Column(db.String)
     address = db.Column(db.String)
     city = db.Column(db.String)
-    zipcode = db.Column(db.String)
+    zipcode = db.Column(db.Integer)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -60,6 +39,28 @@ class Event_Type(db.Model):
         return f"<Event_Type type_id={self.type_id} type_name={self.type_name}>"
 
 
+class Event(db.Model):
+    """Event from database."""
+
+    __tablename__ = "events"
+
+
+    event_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    location_id = db.Column(db.Integer, db.ForeignKey('locations.location_id'))
+    type_id = db.Column(db.Integer, db.ForeignKey('event_types.type_id'))
+    time = db.Column(db.DateTime)
+    weekday = db.Column(db.String)
+
+    location = db.relationship('Location', backref='event')
+    event_type = db.relationship('Event_Type', backref='event')
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return f"""<Event event_id={self.event_id} location_id={self.location_id}
+                    type_id={self.type_id}>"""
+
+
 def connect_to_db(app):
     """Connect the database to our Flask app."""
 
@@ -73,5 +74,5 @@ if __name__ == "__main__":
 
 
     from server import app
-    commect_to_db(app)
+    connect_to_db(app)
     print("Connected to DB.")

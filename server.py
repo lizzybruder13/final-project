@@ -24,6 +24,20 @@ def index():
     return render_template('homepage.html')
 
 
+@app.route('/search_type')
+def search_type():
+    """Display events given a certain type."""
+
+    return 'Hello'
+
+
+@app.route('/search_dow')
+def search_dow():
+    """Display event given a certain day of the week."""
+
+    return 'Hey'
+
+
 if __name__ == "__main__":
 
     app.debug = True
