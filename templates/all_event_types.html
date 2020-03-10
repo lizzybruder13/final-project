@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <h2>All Event Types</h2>
+
+    <ul name='event_types'>
+      {% for event_type in event_types %}
+        <li>
+          event_id: {{event_type.type_id}}
+          type_name: {{event_type.type_name}}
+        </li><br>
+      {% endfor %}
+    </ul>
+  {% endblock %}

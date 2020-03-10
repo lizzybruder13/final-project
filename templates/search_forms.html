@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <br><br>
+  <h1>Search By:</h1>
+  <br>
+  <div>
+    <h2>Day of the Week:</h2>
+    <form action='/search_dow'>
+      <select id="weekday" name="weekday">
+        {% for day in dow %}
+          <option value=day>day</option>
+        {% endfor %}
+      </select>
+      <br>
+      <input type='submit' value='Search by Weekday'>
+    </form>
+  </div>
+{% endblock %}

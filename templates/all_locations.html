@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <h2>All Locations</h2>
+
+  <ul name='locations'>
+    {% for location in locations %}
+      <li>
+        location_id: {{location.location_id}}
+        name: {{location.name}}
+      </li><br>
+    {% endfor %}
+  </ul>
+{% endblock %}

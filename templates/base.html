@@ -13,6 +13,26 @@
 
 </head>
 <body>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: darkturquoise;">
+    <img src="/static/logo.png" width="100" width="60" id="logo">
+    <form class="form-inline">
+      <a class="btn btn-outline-secondary" type="button" href="/">Home</a>
+      <a class="btn btn-outline-secondary" type="button" href="/all_events">View All Events</a>
+      <a class="btn btn-outline-secondary" type="button" href="/all_locations">View All Locations</a>
+      <a class="btn btn-outline-secondary" type="button" href="/all_event_types">View All Event Types</a>
+      
+    </form>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Search by:
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Type</a>
+        <a class="dropdown-item" href="#">Day of the Week</a>
+      </div>
+    </div>
+  </nav>
+  <br>
   {% block body %}{% endblock %}
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

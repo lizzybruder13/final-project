@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+  <h2>All Events</h2>
+
+  <ul name='events'>
+    {% for event in events %}
+      <li>
+        event_id: {{event.event_id}}
+        location: {{event.location.name}}
+        event_type: {{event.event_type.type_name}}
+        time: {{event.time}}
+        weekday: {{event.weekday}}
+      </li><br>
+    {% endfor %}
+  </ul>
+
+  
+
+  
+
+{% endblock %}
