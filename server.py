@@ -2,7 +2,7 @@
 
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, redirect, request, flash, session
+from flask import Flask, render_template, redirect, request, flash, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, Event, Location, Event_Type
@@ -54,29 +54,42 @@ def all_event_types():
     return render_template('all_event_types.html', event_types=event_types)
 
 
-@app.route('/search_forms')
-def search_forms():
-    """Display forms for different types of searches."""
+@app.route('/search_form_type')
+def search_form_type():
+    """Display search form for event type."""
 
-    return render_template('search_forms.html', dow=DAYS_OF_THE_WEEK)
+    event_types = Event_Type.query.all()
+
+    return render_template('search_form_type.html', event_types=event_types)
+
+
+@app.route('/search_form_dow')
+def search_form_dow():
+    """Display seach form for day of the week."""
+
+    return render_template('search_form_dow.html', dow=DAYS_OF_THE_WEEK)
 
 
 @app.route('/search_type')
 def search_type():
     """Display events given a certain type."""
 
-    return 'Hello'
+    evt_type_id = request.args.get('typeofevent')
+
+    events_type = Event.query.filter_by(type_id=evt_type_id).all()
+
+    return render_template('events_type.html', events_type=events_type)
 
 
 @app.route('/search_dow')
 def search_dow():
     """Display event given a certain day of the week."""
 
-    weekday = request.args.get('weekday')
+    weekday = request.args.get('dayofweek')
 
     events_dow = Event.query.filter_by(weekday=weekday).all()
 
-    print(weekday)
+    return render_template('events_dow.html', events_dow=events_dow)
 
 
 if __name__ == "__main__":

@@ -3,12 +3,15 @@
 {% block body %}
   <h2>All Locations</h2>
 
-  <ul name='locations'>
+  <div class="list-group">
     {% for location in locations %}
-      <li>
-        location_id: {{location.location_id}}
-        name: {{location.name}}
-      </li><br>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{location.name}}</h5>
+        </div>
+        <p class="mb-1">{{location.address}}</p>
+        <p class="mb-1">{{location.city}}, MN {{location.zipcode}}</p>
+      </a>
     {% endfor %}
-  </ul>
+  </div>
 {% endblock %}

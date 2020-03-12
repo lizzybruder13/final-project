@@ -6,8 +6,8 @@
   <br>
   <div>
     <h2>Day of the Week:</h2>
-    <form action='/search_dow' id='weekday'>
-      <select name="dayofweek">
+    <form action='/search_dow'>
+      <select id='weekday' name="dayofweek">
         {% for day in dow %}
           <option value='{{day}}'>{{day}}</option>
         {% endfor %}

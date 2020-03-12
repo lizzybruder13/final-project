@@ -3,7 +3,7 @@
 <head>
   {% block head %}{% endblock %}
   <title>{% block title %}{% endblock %}</title>
-  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" type='text/css' href="/static/styles.css">
   <script
   src="http://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -13,6 +13,9 @@
 
 </head>
 <body>
+  <style>
+    body {padding-top: 70px;} 
+  </style>
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: darkturquoise;">
     <img src="/static/logo.png" width="100" width="60" id="logo">
     <form class="form-inline">
@@ -27,8 +30,8 @@
         Search by:
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Type</a>
-        <a class="dropdown-item" href="#">Day of the Week</a>
+        <a class="dropdown-item" href="/search_form_type">Type</a>
+        <a class="dropdown-item" href="/search_form_dow">Day of the Week</a>
       </div>
     </div>
   </nav>
