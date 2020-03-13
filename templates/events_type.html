@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 
 {% block body %}
-  <ul>
+  <div class="list-group">
     {% for event in events_type %}
-      <li>
-          event_id: {{event.event_id}}
-          location: {{event.location.name}}
-          event_type: {{event.event_type.type_name}}
-          time: {{event.time}}
-          weekday: {{event.weekday}}
-        </li><br>
-      {% endfor %}
-  </ul>
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{event.event_type.type_name}} - {{event.location.name}}</h5>
+        </div>
+        <p class="mb-1">{{event.weekday}} at {{event.time}}</p>
+      </a>
+    {% endfor %}
+  </div>
 {% endblock %}

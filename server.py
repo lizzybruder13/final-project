@@ -2,7 +2,7 @@
 
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, redirect, request, flash, session, jsonify
+from flask import Flask, render_template, redirect, request, flash, session 
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, Event, Location, Event_Type
@@ -90,6 +90,15 @@ def search_dow():
     events_dow = Event.query.filter_by(weekday=weekday).all()
 
     return render_template('events_dow.html', events_dow=events_dow)
+
+
+@app.route('/login')
+def login_form():
+    """Display form that collects users username and password."""
+
+    return render_template('login_form.html')
+
+
 
 
 if __name__ == "__main__":

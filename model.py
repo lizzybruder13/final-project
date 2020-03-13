@@ -61,6 +61,22 @@ class Event(db.Model):
                     type_id={self.type_id}>"""
 
 
+class User(db.Model):
+    """A user."""
+
+    __tablename__ = "users"
+
+    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    is_authenticated = db.Column(db.Boolean)
+    is_active = db.Column(db.Boolean)
+    is_anonymous = db.Column(db.Boolean)
+
+    def get_id(user_id):
+        """Find user_id from table."""
+
+        User.query.filter_by(user_id=user_id).one()
+
+
 def connect_to_db(app):
     """Connect the database to our Flask app."""
 
