@@ -2,7 +2,7 @@
 
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, redirect, request, flash, session 
+from flask import Flask, render_template, redirect, request, flash, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, Event, Location, Event_Type
@@ -33,7 +33,7 @@ def all_events():
 
     events = Event.query.all()
 
-    return render_template('all_events.html', events=events)
+    return jsonify([event.serialize() for event in events])
 
 
 @app.route('/all_locations')
@@ -42,7 +42,9 @@ def all_locations():
 
     locations = Location.query.all()
 
-    return render_template('all_locations.html', locations=locations)
+    return jsonify([location.serialize() for location in locations])
+
+    # return render_template('all_locations.html', locations=locations)
 
 
 @app.route('/all_event_types')

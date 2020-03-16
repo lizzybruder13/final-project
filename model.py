@@ -18,6 +18,14 @@ class Location(db.Model):
     city = db.Column(db.String)
     zipcode = db.Column(db.Integer)
 
+    def serialize(self):
+        """ """
+        return {
+            'name':self.name, 'address':self.address, 
+            'city':self.city, 'zipcode':self.zipcode
+        }
+
+
     def __repr__(self):
         """Provide helpful representation when printed."""
 
@@ -53,6 +61,16 @@ class Event(db.Model):
 
     location = db.relationship('Location', backref='event')
     event_type = db.relationship('Event_Type', backref='event')
+
+
+    def serialize(self):
+        """ """
+        return {
+            'event_id':self.event_id, 'location':self.location.name, 
+            'type':self.event_type.type_name, 'time':str(self.time),
+            'weekday':self.weekday 
+        }
+
 
     def __repr__(self):
         """Provide helpful representation when printed."""
