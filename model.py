@@ -41,6 +41,12 @@ class Event_Type(db.Model):
     type_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     type_name = db.Column(db.String)
 
+    def serialize(self):
+        """ """
+        return {
+            'name':self.type_name, 'type_id':self.type_id
+        }
+
     def __repr__(self):
         """Provide helpful representation when printed."""
 
@@ -75,8 +81,7 @@ class Event(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"""<Event event_id={self.event_id} location_id={self.location_id}
-                    type_id={self.type_id}>"""
+        return f"<Event event_id={self.event_id} location_id={self.location_id} type_id={self.type_id}>"
 
 
 class User(db.Model):
@@ -98,6 +103,7 @@ class User(db.Model):
 def connect_to_db(app):
     """Connect the database to our Flask app."""
 
+    app.config['SQLALCHEMY_ECHO'] = False 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///bar_events'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app

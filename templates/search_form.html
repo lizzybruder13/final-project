@@ -1,0 +1,14 @@
+<h1>Search By:</h1>
+<br>
+<div>
+  <h2>Type of Event:</h2>
+  <form action='/search_type'>
+    <select id='event_type_id' name="typeofevent">
+      {% for evt_type in event_types %}
+        <option value='{{evt_type.type_id}}'>{{evt_type.type_name}}</option>
+      {% endfor %}
+    </select>
+    <br>
+    <input id="submitType" type='submit' value='Search by Type'>
+  </form>
+</div>

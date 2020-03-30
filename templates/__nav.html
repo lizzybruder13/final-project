@@ -1,0 +1,24 @@
+<style>
+    body {padding-top: 70px;} 
+  </style>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: darkturquoise;">
+    <img src="/static/logo.png" width="100" width="60" id="logo">
+    <form class="form-inline">
+      <a id="goHome" class="btn btn-outline-secondary" type="button" href="/">Home</a>
+      <a id="viewAllEvents" class="btn btn-outline-secondary" type="button" href="/">View All Events</a>
+      <a id="viewAllLocations" class="btn btn-outline-secondary" type="button" href="/">View All Locations</a>
+      <a id="viewAllEventTypes" class="btn btn-outline-secondary" type="button" href="/">View All Event Types</a>
+      
+    </form>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Search by:
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a id="searchForm" class="dropdown-item" href="/search_form">Search</a>
+        <a id="searchFormType" class="dropdown-item" href="/search_form_type">Type</a>
+        <a id="searchFormDOW" class="dropdown-item" href="/search_form_dow">Day of the Week</a>
+      </div>
+    </div>
+  </nav>
+  <br>

@@ -7,7 +7,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, Event, Location, Event_Type
 
-
+import random
 
 app = Flask(__name__)
 
@@ -24,7 +24,14 @@ DAYS_OF_THE_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
 def index():
     """Homepage."""
 
-    return render_template('homepage.html')
+    events = Event.query.all()
+
+    locations = Location.query.all()
+
+    event_types = Event_Type.query.all()
+
+    return render_template('base.html', events=events, locations=locations, 
+                           event_types=event_types, dow=DAYS_OF_THE_WEEK)
 
 
 @app.route('/all_events')
@@ -44,8 +51,6 @@ def all_locations():
 
     return jsonify([location.serialize() for location in locations])
 
-    # return render_template('all_locations.html', locations=locations)
-
 
 @app.route('/all_event_types')
 def all_event_types():
@@ -53,54 +58,65 @@ def all_event_types():
 
     event_types = Event_Type.query.all()
 
-    return render_template('all_event_types.html', event_types=event_types)
+    return jsonify([event_type.serialize() for event_type in event_types])
 
 
-@app.route('/search_form_type')
-def search_form_type():
-    """Display search form for event type."""
+@app.route('/search_results')
+def search_results():
+    """Query database for given parameters."""
 
-    event_types = Event_Type.query.all()
+    base_query = Event.query
 
-    return render_template('search_form_type.html', event_types=event_types)
+    if request.args.get('event_type'):
+        chosen_types = request.args.getlist('event_type')
 
+        base_query = base_query.filter(Event.type_id.in_(chosen_types))
+        
 
-@app.route('/search_form_dow')
-def search_form_dow():
-    """Display seach form for day of the week."""
+    if request.args.get('weekday'):
+        chosen_weekdays = request.args.getlist('weekday')
 
-    return render_template('search_form_dow.html', dow=DAYS_OF_THE_WEEK)
+        base_query = base_query.filter(Event.weekday.in_(chosen_weekdays))
 
+    if request.args.get('location'):
+        chosen_location = request.args.get('location')
 
-@app.route('/search_type')
-def search_type():
-    """Display events given a certain type."""
+        chosen_string = f"%{chosen_location}%"
 
-    evt_type_id = request.args.get('typeofevent')
+        base_query = base_query.join(Event.location).filter(Location.name.
+            ilike(chosen_string))
 
-    events_type = Event.query.filter_by(type_id=evt_type_id).all()
+    if request.args.get('city'):
+        chosen_city = request.args.get('city')
 
-    return render_template('events_type.html', events_type=events_type)
+        chosen_string = f"%{chosen_city}%"
 
+        base_query = base_query.join(Event.location).filter(Location.city.
+            ilike(chosen_string))
 
-@app.route('/search_dow')
-def search_dow():
-    """Display event given a certain day of the week."""
+    event_results = base_query.all()
 
-    weekday = request.args.get('dayofweek')
-
-    events_dow = Event.query.filter_by(weekday=weekday).all()
-
-    return render_template('events_dow.html', events_dow=events_dow)
-
-
-@app.route('/login')
-def login_form():
-    """Display form that collects users username and password."""
-
-    return render_template('login_form.html')
+    return jsonify([event_result.serialize() for event_result in event_results])
 
 
+@app.route('/featured_events')
+def featured_events():
+    """Display random events."""
+
+    num_events = 0
+    events_query = Event.query
+    total_events = []
+
+    for event in events_query:
+        total_events.append(event.event_id)
+
+    num_list = random.sample(total_events, 5)
+
+    featured_events = events_query.filter(Event.event_id.in_(num_list))
+
+    display_event = featured_events.all()
+
+    return jsonify([feat_event.serialize() for feat_event in display_event])
 
 
 if __name__ == "__main__":
