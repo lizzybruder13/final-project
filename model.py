@@ -22,7 +22,7 @@ class Location(db.Model):
         """ """
         return {
             'name':self.name, 'address':self.address, 
-            'city':self.city, 'zipcode':self.zipcode
+            'city':self.city, 'zipcode':self.zipcode, 'location_id':self.location_id
         }
 
 
@@ -72,9 +72,11 @@ class Event(db.Model):
     def serialize(self):
         """ """
         return {
-            'event_id':self.event_id, 'location':self.location.name, 
+            'event_id':self.event_id, 'location_id':self.location_id, 
+            'location':self.location.name, 'zipcode':self.location.zipcode,
             'type':self.event_type.type_name, 'time':str(self.time),
-            'weekday':self.weekday 
+            'weekday':self.weekday, 'city':self.location.city, 
+            'address':self.location.address 
         }
 
 

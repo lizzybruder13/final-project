@@ -1,0 +1,32 @@
+<div id='searchDisplay' style="display:none">
+  <div>
+    <br>
+    <form id="customSearch" action='/search_results'>
+      <h2>Type of Event:</h2>
+      {% for evt_type in event_types %}
+        <div>
+          <input type='checkbox' id='event_type' name='event_type' 
+                 value='{{evt_type.type_id}}'>
+          <label for='event_type'>{{evt_type.type_name}}</label>
+        </div>
+      {% endfor %}
+      <br>
+      <h2>Day of the Week:</h2>
+      {% for day in dow %}
+        <div>
+          <input type='checkbox' id='weekday' name='weekday' value='{{day}}'>
+          <label for='{{day}}'>{{day}}</label>
+        </div>
+      {% endfor %}
+      </select>
+      <br>
+      <h2>Venue:</h2>
+      <input type='text' id='location' name='location' placeholder=''>
+      <br>
+      <h2>City:</h2>
+      <input type='text' id='city' name='city' placeholder=''>
+      <br><br>
+      <input id="searchResult" type='submit' value='Search'>
+    </form>
+  </div>
+</div>

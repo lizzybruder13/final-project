@@ -12,43 +12,10 @@
 <body>
   {% include '__nav.html' %}
   <script src="/static/ajax.js"></script>
-  <div id='searchDisplay' style="display:none">
-    <div>
-    <br>
-    <form action='/search_results'>
-      <h2>Type of Event:</h2>
-      {% for evt_type in event_types %}
-        <div>
-          <input type='checkbox' id='event_type' name='event_type' 
-                 value='{{evt_type.type_id}}'>
-          <label for='event_type'>{{evt_type.type_name}}</label>
-        </div>
-      {% endfor %}
-      <br>
-      <h2>Day of the Week:</h2>
-      {% for day in dow %}
-        <div>
-          <input type='checkbox' id='weekday' name='weekday' value='{{day}}'>
-          <label for='{{day}}'>{{day}}</label>
-        </div>
-      {% endfor %}
-      </select>
-      <br>
-      <h2>Venue:</h2>
-      <input type='text' id='location' name='location' placeholder=''>
-      <br>
-      <h2>City:</h2>
-      <input type='text' id='city' name='city' placeholder=''>
-      <br><br>
-      <input id="searchResult" type='submit' value='Search'>
-    </form>
-    </div>
-  </div>
-  <div id='featured_events'>
-    <!-- input featured events here -->
-  </div>
-  <div id='body' onload="displayFeatured();"></div>
-  {% block body %}{% endblock %}
+  <h1 id='pageHeader'></h1>
+  {% include '__searchForm.html' %}
+  <br>
+  <div id='body'></div>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>

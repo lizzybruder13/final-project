@@ -94,6 +94,11 @@ def search_results():
         base_query = base_query.join(Event.location).filter(Location.city.
             ilike(chosen_string))
 
+    if request.args.get('type_id'):
+        chosen_type = request.args.get('type_id')
+
+        base_query = base_query.filter(Event.type_id==chosen_type)
+
     event_results = base_query.all()
 
     return jsonify([event_result.serialize() for event_result in event_results])
@@ -117,6 +122,35 @@ def featured_events():
     display_event = featured_events.all()
 
     return jsonify([feat_event.serialize() for feat_event in display_event])
+
+
+@app.route('/more_event_info')
+def more_event_info():
+    """Display more information about a certain event."""
+
+    event_id_res = request.args.get('event_id')
+    event = Event.query.get(event_id_res)
+
+    location_id_res = request.args.get('location_id')
+
+    events_list = Event.query.filter(Event.location_id == location_id_res, Event.event_id != event_id_res).all()
+
+    return jsonify(event.serialize(), [events.serialize() for events in events_list])
+
+
+@app.route('/more_loc_info')
+def more_loc_info():
+    """Display more information about a certain location."""
+
+    location_id_res = request.args.get('location_id')
+
+    location = Location.query.get(location_id_res)
+
+    events_list = Event.query.filter_by(location_id = location_id_res).all()
+
+    return jsonify(location.serialize(), [events.serialize() for events in events_list])
+
+
 
 
 if __name__ == "__main__":
